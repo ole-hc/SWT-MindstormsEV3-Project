@@ -1,0 +1,3 @@
+[submodule "gradle_scripts"]
+	path = gradle_scripts
+	url = https://github.com/ev3dev-lang-java/template_project_gradle.git
