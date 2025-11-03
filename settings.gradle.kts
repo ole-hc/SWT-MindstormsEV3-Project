@@ -1,0 +1,1 @@
+rootProject.name = "SWT-MindstormsEV3-Project"
