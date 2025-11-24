@@ -1,7 +1,5 @@
 package org.swtthm.bandit;
 
-import ev3dev.actuators.lego.motors.Motor;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,11 +22,11 @@ public class GameInteractor {
     public void startGame() {
         System.out.println("[INTERACTOR] Game started...");
 
-        int credit = inMemoryGateway.getCredit();
-        System.out.println("[INTERACTOR] Current credits: " + credit);
+        int spins = inMemoryGateway.getSpins();
+        System.out.println("[INTERACTOR] Current spins: " + spins);
 
-        if(credit > 0) {
-            inMemoryGateway.setCredit(credit - 1);
+        if(spins > 0) {
+            inMemoryGateway.setSpins(spins - 1);
 
             List<Pictures> picture = new ArrayList<>();
             generatePicture(picture);
