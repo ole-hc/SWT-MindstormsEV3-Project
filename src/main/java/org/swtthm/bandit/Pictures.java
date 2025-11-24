@@ -6,13 +6,13 @@ public enum Pictures {
     BLUE(180),
     GREEN(270);
 
-    private final int angel;
+    private final int angle;
 
     Pictures(int angel){
-        this.angel = angel;
+        this.angle = angel;
     }
 
-    public int getAngel(){
-        return this.angel;
+    public int getAngle(){
+        return this.angle;
     }
 }
