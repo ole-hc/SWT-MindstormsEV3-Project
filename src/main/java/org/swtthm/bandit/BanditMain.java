@@ -2,6 +2,7 @@ package org.swtthm.bandit;
 
 import ev3dev.actuators.lego.motors.Motor;
 import ev3dev.sensors.Button;
+import lejos.utility.Delay;
 
 public class BanditMain {
     public static void main(String[] args) {
@@ -10,7 +11,9 @@ public class BanditMain {
         GameInteractor interactor = new GameInteractor();
         StartButton startButton = new StartButton(interactor);
         MotorController motorController = new MotorController(interactor);
-        motorController.moveLeftMotor();
+        motorController.moveMotors(Pictures.RED.getAngel(), Pictures.RED.getAngel(), Pictures.RED.getAngel());
+        Delay.msDelay(2000);
+        motorController.moveMotors(Pictures.RED.getAngel(), Pictures.RED.getAngel(), Pictures.RED.getAngel());
         startButton.waitForInput();
     }
 }
