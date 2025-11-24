@@ -64,16 +64,16 @@ public class GameInteractor {
         for(int i = 0; i < 3; i++) {
             switch (random.nextInt(4)) {
                 case 0:
-                    picture.add(Pictures.ROT);
+                    picture.add(Pictures.RED);
                     break;
                 case 1:
-                    picture.add(Pictures.GRUEN);
+                    picture.add(Pictures.GREEN);
                     break;
                 case 2:
-                    picture.add(Pictures.GELB);
+                    picture.add(Pictures.YELLOW);
                     break;
                 case 3:
-                    picture.add(Pictures.BLAU);
+                    picture.add(Pictures.BLUE);
                     break;
             }
         }
