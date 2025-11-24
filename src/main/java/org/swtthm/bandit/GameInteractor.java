@@ -17,7 +17,7 @@ public class GameInteractor {
         this.inMemoryGateway = inMemoryGateway;
     }
 
-    public void startGame(){
+    public void startGame() {
         System.out.println("Los");
 
         int credit = inMemoryGateway.getCredit();

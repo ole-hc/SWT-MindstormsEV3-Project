@@ -1,10 +1,10 @@
 package org.swtthm.bandit;
 
 public enum Pictures {
-    ROT(0),
-    GRUEN(90),
-    GELB(180),
-    BLAU(270);
+    RED(0),
+    YELLOW(90),
+    BLUE(180),
+    GREEN(270);
 
     private final int angel;
 
