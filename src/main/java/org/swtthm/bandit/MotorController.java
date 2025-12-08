@@ -19,7 +19,7 @@ public class MotorController {
     }
 
     public void moveMotors(List<Pictures> picture, List<Pictures> lastPicture) {
-        int angleFiveRotations = 1 * 360;
+        int angleOneRotation = 1 * 360;
 
         leftMotor.synchronizeWith(motors);
         leftMotor.startSynchronization();
@@ -33,7 +33,7 @@ public class MotorController {
         for (int index = 0; index < motors.length; index++) {
             System.out.println("[MOTORS] Calculation offset...");
             int offset = 360 - lastPicture.get(index).getAngle();
-            int rotationAngle = angleFiveRotations + picture.get(index).getAngle() + offset;
+            int rotationAngle = angleOneRotation + picture.get(index).getAngle() + offset;
             System.out.println("[MOTORS] Turning motor: " + index + ", " + rotationAngle + " degrees");
 
             System.out.println("[MOTORS] Turning motors...");
