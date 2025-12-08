@@ -1,23 +1,31 @@
 package org.swtthm.bandit;
 
 import ev3dev.actuators.LCD;
+import ev3dev.actuators.LCDJessie;
 import ev3dev.actuators.LCDStretch;
 import ev3dev.actuators.Sound;
 import ev3dev.utils.JarResource;
+import lejos.hardware.lcd.GraphicsLCD;
 
 import java.io.File;
 import java.io.IOException;
 
 public class BrickOutput {
-
     private Sound sound;
+    private GraphicsLCD lcd;
 
     public BrickOutput(){
         sound = Sound.getInstance();
         sound.setVolume(100);
+
+        lcd = LCDJessie.getInstance();
     }
 
     public void outputWiningSound() {
+    }
+
+    public void outputStartScreen() {
+        lcd.drawString("Zieh am Hebel", 10,10, 10);
     }
 
     public void outputWinningScreen() {
