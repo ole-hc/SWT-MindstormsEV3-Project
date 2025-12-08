@@ -9,38 +9,44 @@ public class GameInteractor {
     private final CoinMotor coinMotor;
     private final BrickOutput brickOutput;
     private final InMemoryGateway inMemoryGateway;
+    private final MotorController motorController;
 
-    public GameInteractor(CoinMotor coinMotor, BrickOutput brickOutput, InMemoryGateway inMemoryGateway){
+    public GameInteractor(CoinMotor coinMotor, BrickOutput brickOutput, InMemoryGateway inMemoryGateway, MotorController motorController){
         random = new Random();
         this.coinMotor = coinMotor;
         this.brickOutput = brickOutput;
         this.inMemoryGateway = inMemoryGateway;
+        this.motorController = motorController;
     }
 
-    public void startGame(){
-        System.out.println("Los");
+    public void startGame() {
+        System.out.println("[INTERACTOR] Game started...");
 
-        int credit = inMemoryGateway.getCredit();
+        int spins = inMemoryGateway.getSpins();
+        System.out.println("[INTERACTOR] Current spins: " + spins);
 
-        if(credit > 0) {
-            inMemoryGateway.setCredit(credit - 1);
+        if(spins > 0) {
+            inMemoryGateway.setSpins(spins - 1);
 
             List<Pictures> picture = new ArrayList<>();
-
             generatePicture(picture);
-
+            System.out.println("[INTERACTOR] Generated picture: ");
             printArray(picture);
 
-            //Add MotorController.start
+            System.out.println("[INTERACTOR] Moving motors...");
+            motorController.moveMotors(picture, inMemoryGateway.getLastPicture());
 
             inMemoryGateway.setLastPicture(picture);
 
             if (determineWin(picture)) {
-                triggerWiningSequence();
+                System.out.println("[INTERACTOR] Trigger winning sequence");
+                triggerWinningSequence();
             } else{
+                System.out.println("[INTERACTOR] Trigger losing sequence");
                 triggerLosingSequence();
             }
         }else {
+            System.out.println("[INTERACTOR] Insufficient funds");
             brickOutput.outputNoMoney();
         }
     }
@@ -50,36 +56,37 @@ public class GameInteractor {
         brickOutput.outputLosingScreen();
     }
 
-    private void triggerWiningSequence(){
+    private void triggerWinningSequence(){
         coinMotor.outputMoney();
         brickOutput.outputWiningSound();
         brickOutput.outputWinningScreen();
     }
 
     private boolean determineWin(List<Pictures> picture){
-        return picture.get(0) == picture.get(1) || picture.get(1) == picture.get(2);
+        return picture.get(0) == picture.get(1) && picture.get(1) == picture.get(2);
     }
 
     private void generatePicture(List<Pictures> picture) {
         for(int i = 0; i < 3; i++) {
             switch (random.nextInt(4)) {
                 case 0:
-                    picture.add(Pictures.ROT);
+                    picture.add(Pictures.RED);
                     break;
                 case 1:
-                    picture.add(Pictures.GRUEN);
+                    picture.add(Pictures.GREEN);
                     break;
                 case 2:
-                    picture.add(Pictures.GELB);
+                    picture.add(Pictures.YELLOW);
                     break;
                 case 3:
-                    picture.add(Pictures.BLAU);
+                    picture.add(Pictures.BLUE);
                     break;
             }
         }
     }
 
     private void printArray(List<Pictures> picture){
+        System.out.print("[INTERACTOR] Picture: ");
         for (Pictures selectedPicture : picture) {
             System.out.print(selectedPicture + ";");
         }
