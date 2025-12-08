@@ -19,6 +19,8 @@ public class BanditMain {
         InMemoryGateway inMemoryGateway = new InMemoryGateway(0, List.of(Pictures.RED, Pictures.RED, Pictures.RED));
         MotorController motorController = new MotorController();
         MoneyInteractor moneyInteractor = new MoneyInteractor(inMemoryGateway);
+
+        brickOutput.outputLosingSound();
         
         CoinButton coinButton = new CoinButton(moneyInteractor);
         final ExecutorService executorService;

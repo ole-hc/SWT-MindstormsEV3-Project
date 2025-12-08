@@ -7,6 +7,8 @@ import ev3dev.utils.JarResource;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 public class BrickOutput {
 
@@ -27,12 +29,12 @@ public class BrickOutput {
     }
 
     public void outputLosingSound() {
-        String filePathWiningSound = "/data/WiningSound.wav";
+        String filePathWiningSound = "data/WiningSound.wav";
 
         try {
-            JarResource.export(filePathWiningSound);
-            File file = new File(filePathWiningSound);
-            sound.playSample(file);
+            //JarResource.export(filePathWiningSound);
+            //File file = new File(filePathWiningSound);
+            sound.playSample(getSoundFile());
 
         }catch (IOException e){
             System.out.println("Couldn't export sound file");
@@ -40,5 +42,22 @@ public class BrickOutput {
     }
 
     public void outputLosingScreen() {
+    }
+
+    public File getSoundFile() throws IOException {
+        // Ressource als InputStream laden
+        InputStream inputStream = getClass().getResourceAsStream("/data/Sound.wav");
+        if (inputStream == null) {
+            throw new IllegalArgumentException("Datei nicht gefunden!");
+        }
+
+        // Temporäre Datei erstellen
+        File tempFile = Files.createTempFile("Sound", ".wav").toFile();
+        tempFile.deleteOnExit(); // wird beim Beenden automatisch gelöscht
+
+        // InputStream in die temporäre Datei kopieren
+        Files.copy(inputStream, tempFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+        return tempFile;
     }
 }
