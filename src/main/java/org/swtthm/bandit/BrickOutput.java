@@ -9,6 +9,8 @@ import lejos.hardware.lcd.GraphicsLCD;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 public class BrickOutput {
     private Sound sound;
@@ -35,14 +37,12 @@ public class BrickOutput {
     }
 
     public void outputLosingSound() {
-        String filePathWiningSound = "/data/WiningSound.wav";
-        sound.beep();
+        String filePathWiningSound = "data/WinningSound.wav";
+
         try {
             //JarResource.export(filePathWiningSound);
-            System.out.println("Jar File exported");
-            File file = new File(filePathWiningSound);
-            System.out.println("Trying to play Sound");
-            sound.playSample(file);
+            //File file = new File(filePathWiningSound);
+            sound.playSample(getSoundFile());
 
         }catch (Exception e){
             System.out.println("Couldn't export sound file");
@@ -50,5 +50,22 @@ public class BrickOutput {
     }
 
     public void outputLosingScreen() {
+    }
+
+    public File getSoundFile() throws IOException {
+        // Ressource als InputStream laden
+        InputStream inputStream = getClass().getResourceAsStream("/data/WinningSound.wav");
+        if (inputStream == null) {
+            throw new IllegalArgumentException("[BRICKOUTPUT] Could not find sound file");
+        }
+
+        // Temporäre Datei erstellen
+        File tempFile = Files.createTempFile("Sound", ".wav").toFile();
+        tempFile.deleteOnExit(); // wird beim Beenden automatisch gelöscht
+
+        // InputStream in die temporäre Datei kopieren
+        Files.copy(inputStream, tempFile.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+        return tempFile;
     }
 }
