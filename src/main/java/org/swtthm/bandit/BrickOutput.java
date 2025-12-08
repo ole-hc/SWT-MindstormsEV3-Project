@@ -1,9 +1,6 @@
 package org.swtthm.bandit;
 
-import ev3dev.actuators.LCD;
-import ev3dev.actuators.LCDStretch;
 import ev3dev.actuators.Sound;
-import ev3dev.utils.JarResource;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +26,7 @@ public class BrickOutput {
     }
 
     public void outputLosingSound() {
-        String filePathWiningSound = "data/WiningSound.wav";
+        String filePathWiningSound = "data/WinningSound.wav";
 
         try {
             //JarResource.export(filePathWiningSound);
@@ -46,9 +43,9 @@ public class BrickOutput {
 
     public File getSoundFile() throws IOException {
         // Ressource als InputStream laden
-        InputStream inputStream = getClass().getResourceAsStream("/data/Sound.wav");
+        InputStream inputStream = getClass().getResourceAsStream("/data/WinningSound.wav");
         if (inputStream == null) {
-            throw new IllegalArgumentException("Datei nicht gefunden!");
+            throw new IllegalArgumentException("[BRICKOUTPUT] Could not find sound file");
         }
 
         // Temporäre Datei erstellen
