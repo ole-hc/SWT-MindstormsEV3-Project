@@ -1,25 +1,31 @@
-package org.swtthm.bandit;
+package org.swtthm.bandit.controller;
 
 import ev3dev.actuators.lego.motors.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
+import org.swtthm.bandit.enums.Picture;
 
 import java.util.List;
 
-public class MotorController {
+public class RollMotorController {
     private final EV3LargeRegulatedMotor leftMotor;
     private final EV3LargeRegulatedMotor middleMotor;
     private final EV3LargeRegulatedMotor rightMotor;
     private final EV3LargeRegulatedMotor[] motors;
 
-    public MotorController() {
+    public RollMotorController() {
         leftMotor = new EV3LargeRegulatedMotor(MotorPort.B);
         middleMotor = new EV3LargeRegulatedMotor(MotorPort.C);
         rightMotor = new EV3LargeRegulatedMotor(MotorPort.D);
         motors = new EV3LargeRegulatedMotor[] {leftMotor, middleMotor, rightMotor};
+
+        moveMotors(List.of(Picture.RED, Picture.RED, Picture.RED), List.of(Picture.RED, Picture.RED, Picture.RED), false);
     }
 
-    public void moveMotors(List<Pictures> picture, List<Pictures> lastPicture) {
-        int angleOneRotation = 1 * 360;
+    public void moveMotors(List<Picture> picture, List<Picture> lastPicture, boolean angleRotationOn) {
+        int angleOneRotation = 0;
+        if (angleRotationOn) {
+            angleOneRotation = 1 * 360;
+        }
 
         leftMotor.synchronizeWith(motors);
         leftMotor.startSynchronization();
