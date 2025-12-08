@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import java.util.List;
+
 public class BanditMain {
     public static void main(String[] args) {
         System.out.println("[MAIN] setting up system..");
@@ -23,7 +25,11 @@ public class BanditMain {
         executorService = Executors.newFixedThreadPool(1);
         executorService.execute(coinButton);
 
-        GameInteractor interactor = new GameInteractor(coinMotor, brickOutput, inMemoryGateway, motorController);
+        CoinMotor coinMotor = new CoinMotor();
+        BrickOutput brickOutput = new BrickOutput();
+        InMemoryGateway inMemoryGateway = new InMemoryGateway(0, List.of(Pictures.ROT, Pictures.ROT, Pictures.ROT));
+
+        GameInteractor interactor = new GameInteractor(coinMotor, brickOutput, inMemoryGateway);
         StartButton startButton = new StartButton(interactor);
         System.out.println("[MAIN] Setup complete");
 
