@@ -25,11 +25,7 @@ public class BanditMain {
         executorService = Executors.newFixedThreadPool(1);
         executorService.execute(coinButton);
 
-        CoinMotor coinMotor = new CoinMotor();
-        BrickOutput brickOutput = new BrickOutput();
-        InMemoryGateway inMemoryGateway = new InMemoryGateway(0, List.of(Pictures.ROT, Pictures.ROT, Pictures.ROT));
-
-        GameInteractor interactor = new GameInteractor(coinMotor, brickOutput, inMemoryGateway);
+        GameInteractor interactor = new GameInteractor(coinMotor, brickOutput, inMemoryGateway, motorController);
         StartButton startButton = new StartButton(interactor);
         System.out.println("[MAIN] Setup complete");
 
