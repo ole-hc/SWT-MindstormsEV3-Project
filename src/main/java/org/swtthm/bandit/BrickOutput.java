@@ -28,13 +28,15 @@ public class BrickOutput {
 
     public void outputLosingSound() {
         String filePathWiningSound = "/data/WiningSound.wav";
-
+        sound.beep();
         try {
-            JarResource.export(filePathWiningSound);
+            //JarResource.export(filePathWiningSound);
+            System.out.println("Jar File exported");
             File file = new File(filePathWiningSound);
+            System.out.println("Trying to play Sound");
             sound.playSample(file);
 
-        }catch (IOException e){
+        }catch (Exception e){
             System.out.println("Couldn't export sound file");
         }
     }
