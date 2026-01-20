@@ -15,3 +15,5 @@ https://ev3dev-lang-java.github.io/docs/support/index.html
 https://github.com/ev3dev-lang-java/examples
 
 ![Klassendiagramm](https://github.com/user-attachments/assets/a30f7153-7da4-4acd-a7f3-b6e748b6132e)
+
+https://yuml.me/bandit/edit/583c8f18
