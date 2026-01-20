@@ -1,0 +1,37 @@
+@startuml
+'-------------------------------
+' PlantUML Klassendiagramm für org.swtthm.bandit
+'-------------------------------
+
+' Darstellungseinstellungen
+skinparam classAttributeIconSize 0
+hide empty methods
+hide empty fields
+skinparam packageStyle rectangle
+
+' Hauptpackage
+package org.swtthm.bandit {
+
+    ' Unterpackages
+    package controller {
+        class BrickOutputController
+    }
+    package inputs {
+        class *
+    }
+    package gateway {
+        class *
+    }
+    package interactors {
+        class *
+    }
+
+}
+
+' Optional: Beziehungen automatisch erkennen
+' Du kannst hier manuell Abhängigkeiten hinzufügen, z.B.:
+' Controller --> Interactors
+' Interactors --> Gateway
+' Interactors --> Inputs
+
+@enduml

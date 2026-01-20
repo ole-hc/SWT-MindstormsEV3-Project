@@ -1,13 +1,13 @@
-package org.swtthm.bandit;
+package org.swtthm.bandit.controller;
 
 import ev3dev.actuators.lego.motors.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.utility.Delay;
 
-public class CoinMotor {
-    final EV3MediumRegulatedMotor motor;
+public class CoinMotorController {
+    private final EV3MediumRegulatedMotor motor;
 
-    public CoinMotor() {
+    public CoinMotorController() {
         motor = new EV3MediumRegulatedMotor(MotorPort.A);
         motor.setSpeed(250);
         motor.brake();
