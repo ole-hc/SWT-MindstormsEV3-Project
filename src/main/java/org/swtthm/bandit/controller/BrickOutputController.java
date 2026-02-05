@@ -69,7 +69,7 @@ public class BrickOutputController {
         outputGameCount(gateway.getSpins());
     }
 
-    public void outputGameCount(int count){
+    public synchronized void outputGameCount(int count){
         //Ausgabe der Anzahl an übrigen Spielen
         if (count != 0){
             //Wenn die Anzahl an Spielen über null ist, wird die Ausgabe "Geld einwerfen" wieder entfernt
